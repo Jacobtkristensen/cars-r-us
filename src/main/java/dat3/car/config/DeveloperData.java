@@ -42,7 +42,11 @@ public class DeveloperData implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        createTestData();
+        List<Car> carList = new ArrayList<>();
+        carList.add()
+
+
+
         System.out.println("Allegdedly created test data xD");
     }
 }
