@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 public class Car {
 
     @Id
@@ -32,10 +31,15 @@ public class Car {
     private int bestDiscount;
 
     @UpdateTimestamp
-    @Column(name = "last_edited")
     private LocalDateTime lastEdited;
 
     @CreationTimestamp
-    @Column(name = "created")
     private LocalDateTime created;
+
+    public Car(String brand, String model, double pricePrDay, int bestDiscount) {
+        this.brand = brand;
+        this.model = model;
+        this.pricePrDay = pricePrDay;
+        this.bestDiscount = bestDiscount;
+    }
 }
