@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @NoArgsConstructor
-public class Member {
+public class Member extends AdminDetails{
     @Id
     private String username;
     private String password;
@@ -29,11 +29,11 @@ public class Member {
     private boolean approved;
     private int ranking;
 
-    @UpdateTimestamp
-    private LocalDateTime lastEdited;
+//    @UpdateTimestamp
+//    private LocalDateTime lastEdited;
 
-    @CreationTimestamp
-    private LocalDateTime created;
+//    @CreationTimestamp
+//    private LocalDateTime created;
     public Member(String user, String password, String email, String firstName,
                   String lastName, String street, String city, String zip) {
         this.username = user;

@@ -9,7 +9,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -24,7 +23,6 @@ public class DeveloperData implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         List<Car> carList = new ArrayList<>();
-        carList.add(new Car("Ford", "Mustang", 1500, 10));
         carList.add(new Car("Ford", "Mustang", 1300, 12));
         carList.add(new Car("Toyota", "Corolla", 1200, 8));
         carList.add(new Car("Honda", "Civic", 1300, 9));
