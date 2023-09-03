@@ -42,13 +42,15 @@ public class CarService {
 
         return new CarResponse(newCar, true);
     }
-    public ResponseEntity<Boolean> editCar(CarRequest body, String brand, String model) {
-        Car car = carRepository.findByBrandAndModel(brand, model).
+    public ResponseEntity<Boolean> editCar(CarRequest body, int id) {
+        Car car = carRepository.findById(id).
                 orElseThrow(()-> new
-                        ResponseStatusException(HttpStatus.BAD_REQUEST,"Car with this brand and model does not exist"));
-        if(!body.getBrand().equals(brand) || !body.getModel().equals(model)){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Cannot change brand or model");
+                        ResponseStatusException(HttpStatus.BAD_REQUEST,"Car with this id does not exist"));
+        if(!(body.getId() ==id)){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Cannot change car");
         }
+        car.setBrand(body.getBrand());
+        car.setModel(body.getModel());
         car.setPricePrDay(body.getPricePrDay());
         car.setBestDiscount(body.getBestDiscount());
         carRepository.save(car);

@@ -21,7 +21,7 @@ class MemberController {
     //Security Admin Only
     @GetMapping
     List<MemberResponse> getMembers(){
-        return memberService.getMembers(false) ;
+        return memberService.getMembers(true) ;
     }
 
 
