@@ -17,24 +17,28 @@ CarService carService;
         this.carService = carService;
     }
 
-    //Security ???
+    //Security Admin
     @GetMapping
     List<CarResponse>getCars(){
         return carService.getCars(true);
     }
-    //Security ???
+
+    //Security Admin
     @GetMapping(path = "/{id}")
     CarResponse getCarById(@PathVariable int id) throws Exception{
         return carService.findById(id);
     }
+    //Security Anonymous
     @PostMapping()
     CarResponse addCar(@RequestBody CarRequest body){
         return carService.addCar(body);
     }
+    //Security Admin
     @PutMapping("/{id}")
     void editCar(@RequestBody CarRequest body, @PathVariable int id){
         carService.editCar(body, id);
     }
+
     @DeleteMapping("/{id}")
     void deleteCarById(@PathVariable int id){
         carService.deleteCarById(id);
