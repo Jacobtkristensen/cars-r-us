@@ -20,7 +20,7 @@ CarService carService;
     //Security Admin
     @GetMapping
     List<CarResponse>getCars(){
-        return carService.getCars(true);
+        return carService.getCars(false);
     }
 
     //Security Admin
@@ -38,7 +38,14 @@ CarService carService;
     void editCar(@RequestBody CarRequest body, @PathVariable int id){
         carService.editCar(body, id);
     }
-
+    @PatchMapping("/price/{id}/{newPrice}")
+    void setPrice(@PathVariable int id, @PathVariable double newPrice){
+        carService.setPrice(id, newPrice);
+    }
+    @PatchMapping("/discount/{id}/{newDiscount}")
+    void setDiscount(@PathVariable int id, @PathVariable int newDiscount){
+        carService.setDiscount(id, newDiscount);
+    }
     @DeleteMapping("/{id}")
     void deleteCarById(@PathVariable int id){
         carService.deleteCarById(id);
