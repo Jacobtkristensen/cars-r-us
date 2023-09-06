@@ -2,14 +2,13 @@ package dat3.car.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
@@ -29,11 +28,15 @@ public class Member extends AdminDetails{
     private boolean approved;
     private int ranking;
 
-//    @UpdateTimestamp
-//    private LocalDateTime lastEdited;
+    @OneToMany(mappedBy = "member")
+    private List<Reservation> reservations;
 
-//    @CreationTimestamp
-//    private LocalDateTime created;
+    public void addReservation(Reservation reservation){
+        if(reservations == null) {
+            reservations = new ArrayList<>();
+        }
+        reservations.add(reservation);
+    }
     public Member(String user, String password, String email, String firstName,
                   String lastName, String street, String city, String zip) {
         this.username = user;

@@ -1,8 +1,6 @@
 package dat3.car.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import dat3.car.entity.Car;
-import dat3.car.entity.Member;
 import lombok.*;
 
 @Getter
