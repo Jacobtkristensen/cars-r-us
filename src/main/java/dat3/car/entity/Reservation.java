@@ -4,14 +4,15 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.time.LocalDate;
 
 @Getter
 @Setter
 @NoArgsConstructor
-//lombok
+//Lombok above
 @Entity
-public class Reservation extends AdminDetails {
+public class Reservation extends AdminDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
@@ -19,18 +20,18 @@ public class Reservation extends AdminDetails {
     LocalDate rentalDate;
 
     @ManyToOne
-    private Car car;
+    Member member;
 
     @ManyToOne
-    private Member member;
+    Car car;
 
-
-
-    public Reservation( LocalDate rentalDate, Car car, Member member) {
-        this.car = car;
-        this.member = member;
+    public Reservation(LocalDate rentalDate,Car car, Member member) {
         this.rentalDate = rentalDate;
+        this.member = member;
+        this.car = car;
         car.addReservation(this);
         member.addReservation(this);
+
     }
+
 }

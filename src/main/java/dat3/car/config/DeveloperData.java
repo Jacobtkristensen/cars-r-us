@@ -67,7 +67,7 @@ public class DeveloperData implements ApplicationRunner {
 
         LocalDate date1 = LocalDate.now().plusDays(2);
         LocalDate date2 = LocalDate.now().plusDays(3);
-        Reservation r1 = new Reservation(date1, car1, m1 );
+        Reservation r1 = new Reservation(date1, car1, m1);
         Reservation r2 = new Reservation(date2, car1, m1);
         reservationRepository.save(r1);
         reservationRepository.save(r2);

@@ -16,29 +16,29 @@ import java.time.LocalDate;
 
 @Service
 public class ReservationService {
+
     CarRepository carRepository;
     MemberRepository memberRepository;
     ReservationRepository reservationRepository;
+    MemberService memberService;
+
     public ReservationService(CarRepository carRepository, MemberRepository memberRepository, ReservationRepository reservationRepository) {
         this.carRepository = carRepository;
         this.memberRepository = memberRepository;
         this.reservationRepository = reservationRepository;
     }
-    public ReservationResponse reserveCar(ReservationRequest body) {
-        if(body.getDate().isBefore(LocalDate.now())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Date cannot be in the past");
+
+    public ReservationResponse reserveCar(ReservationRequest body){
+        if(body.getDate().isBefore(LocalDate.now())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Date in past not allowed");
         }
-        Member member = memberRepository.findById(body.getUsername()).
-                orElseThrow(()-> new
-                        ResponseStatusException(HttpStatus.BAD_REQUEST,"Member with this username does not exist"));
-        Car car = carRepository.findById(body.getCarId()).
-                orElseThrow(()-> new
-                        ResponseStatusException(HttpStatus.BAD_REQUEST,"Car with this id does not exist"));
-
-        Reservation reservation = reservationRepository.save(new Reservation(body.getDate(), car, member ));
-        return new ReservationResponse(reservation);
+        Member member = memberRepository.findById(body.getUserName()).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND,"No member with this id found"));
+        Car car = carRepository.findById(body.getCarId()).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND,"No Car with this id found"));
+        //What if already reserved  --> Tomorrow
+        Reservation res = reservationRepository.save(new Reservation(body.getDate(),car,member));
+        return  new ReservationResponse(res);
     }
-
-
 
 }

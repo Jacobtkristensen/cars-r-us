@@ -11,9 +11,9 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 public class ReservationRequest {
-    int carId;
-    String username;
-    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
-    LocalDate date;
 
+    int carId;
+    String userName;
+    @JsonFormat(pattern = "yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
+    LocalDate date;
 }
