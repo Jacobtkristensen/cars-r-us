@@ -36,8 +36,6 @@ public class ReservationService {
                         ResponseStatusException(HttpStatus.BAD_REQUEST,"Car with this id does not exist"));
 
         Reservation reservation = reservationRepository.save(new Reservation(body.getDate(), car, member ));
-
-
         return new ReservationResponse(reservation);
     }
 
