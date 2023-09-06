@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class Reservation extends AdminDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    int id;
 
     LocalDate rentalDate;
 

@@ -1,5 +1,6 @@
 package dat3.car.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -18,7 +19,9 @@ import java.util.List;
 public class Member extends AdminDetails{
     @Id
     private String username;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private String email;
     private String firstName;
     private String lastName;
