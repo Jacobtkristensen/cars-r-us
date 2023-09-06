@@ -6,7 +6,7 @@
 <br> 
     
 ### ***The idea with, and reasons for why to use, an ORM-mapper***
-
+ 
 ### ***The meaning of the terms JPA, Hibernate and Spring Data JPA and how they are connected***
 
 ### ***How to create simple Java entities and map them to a database via the Spring Data API***

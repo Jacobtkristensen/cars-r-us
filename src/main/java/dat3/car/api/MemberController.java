@@ -1,6 +1,5 @@
 package dat3.car.api;
 
-
 import dat3.car.dto.MemberRequest;
 import dat3.car.dto.MemberResponse;
 import dat3.car.service.MemberService;
@@ -10,8 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/members")
-class MemberController {
-
+public class MemberController {
     MemberService memberService;
 
     public MemberController(MemberService memberService) {
