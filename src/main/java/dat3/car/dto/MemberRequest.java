@@ -6,22 +6,21 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor //A must for @Builder
 @Builder
 //@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MemberRequest {
-    private String username;
-    private String email;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String street;
-    private String city;
-    private String zip;
+    String username;
+    String email;
+    String password;
+    String firstName;
+    String lastName;
+    String street;
+    String city;
+    String zip;
 
     public static Member getMemberEntity(MemberRequest m){
-        return new Member(m.username,m.getPassword(),m.getEmail(),
-                m.firstName, m.lastName,m.getStreet(), m.getCity(), m.getZip());
+        return new Member(m.username,m.getPassword(),m.getEmail(), m.firstName, m.lastName,m.getStreet(), m.getCity(), m.getZip());
     }
 
     // Member to MemberRequest conversion

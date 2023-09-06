@@ -5,7 +5,6 @@ import dat3.car.dto.MemberResponse;
 import dat3.car.entity.Member;
 import dat3.car.repository.MemberRepository;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -20,20 +19,19 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    public List<MemberResponse> getMembers(boolean includeAll) {
-
+    public List<MemberResponse> getMembers(boolean includeAll  ) {
         List<Member> members = memberRepository.findAll();
         List<MemberResponse> response = new ArrayList<>();
-        for(Member member : members){
-            MemberResponse mr = new MemberResponse(member, includeAll);
+        for(Member member: members){
+            MemberResponse mr = new MemberResponse(member,includeAll);
             response.add(mr);
         }
-        // Lavet med stream i stedet for for-each
-        //List<MemberResponse> response = members.stream().map((member -> new MemberResponse(member, includeAll))).toList();
-        //return members.stream().map((member -> new MemberResponse(member, includeAll))).toList();
         return response;
+    }
 
-
+    public MemberResponse findById(String username) {
+        Member member = getMemberByUsername(username);
+        return new MemberResponse(member,true);
     }
 
     public MemberResponse addMember(MemberRequest body) {
@@ -41,15 +39,12 @@ public class MemberService {
             throw  new ResponseStatusException(HttpStatus.BAD_REQUEST,"This user already exists");
         }
         Member newMember = MemberRequest.getMemberEntity(body);
-
         newMember = memberRepository.save(newMember);
-
-        return new MemberResponse(newMember, true);
+        return new MemberResponse(newMember,true);
     }
-    public ResponseEntity<Boolean> editMember(MemberRequest body, String username) {
-        Member member = memberRepository.findById(username).
-                orElseThrow(()-> new
-                        ResponseStatusException(HttpStatus.BAD_REQUEST,"Member with this username does not exist"));
+
+    public void editMember(MemberRequest body, String username) {
+        Member member = getMemberByUsername(username);
         if(!body.getUsername().equals(username)){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Cannot change username");
         }
@@ -61,32 +56,22 @@ public class MemberService {
         member.setCity(body.getCity());
         member.setZip(body.getZip());
         memberRepository.save(member);
-        return ResponseEntity.ok(true);
     }
 
 
-    public MemberResponse findById(String username) {
-        Member member = memberRepository.findById(username).
-                orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Member with this username does noy exist"));
-        return new MemberResponse(member, true);
-    }
     public void setRankingForUser(String username, int value) {
         Member member = getMemberByUsername(username);
         member.setRanking(value);
         memberRepository.save(member);
     }
 
-
     public void deleteMemberByUsername(String username) {
         Member member = getMemberByUsername(username);
         memberRepository.delete(member);
     }
 
-
     private Member getMemberByUsername(String username){
         return memberRepository.findById(username).
                 orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Member with this username does not exist"));
     }
-
-
 }

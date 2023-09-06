@@ -14,26 +14,27 @@ import java.time.LocalDateTime;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CarResponse {
-    private int id;
-    private String brand;
-    private String model;
-    private double pricePrDay;
-    private int bestDiscount;
+
+    int id;
+    String brand;
+    String model;
+    double pricePrDay;
+    Integer bestDiscount;
 
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
     LocalDateTime created;
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
     LocalDateTime edited;
 
-    public CarResponse(Car c, boolean includeAll) {
-        this.id = c.getId();
-        this.brand = c.getBrand();
-        this.model = c.getModel();
-        this.pricePrDay = c.getPricePrDay();
+    public CarResponse(Car car, boolean includeAll) {
+        this.id = car.getId();
+        this.brand = car.getBrand();
+        this.model = car.getModel();
+        this.pricePrDay = car.getPricePrDay();
         if(includeAll){
-            this.bestDiscount = c.getBestDiscount();
-            this.created = c.getCreated();
-            this.edited = c.getEdited();
+            this.bestDiscount = car.getBestDiscount();
+            this.created = car.getCreated();
+            this.edited = car.getEdited();
         }
     }
 }

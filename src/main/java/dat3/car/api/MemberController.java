@@ -9,7 +9,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/members")
-public class MemberController {
+class MemberController {
+
     MemberService memberService;
 
     public MemberController(MemberService memberService) {
@@ -19,7 +20,7 @@ public class MemberController {
     //Security Admin Only
     @GetMapping
     List<MemberResponse> getMembers(){
-        return memberService.getMembers(true) ;
+        return memberService.getMembers(false) ;
     }
 
 
@@ -38,14 +39,15 @@ public class MemberController {
     //Security Admin
     @PutMapping("/{username}")
     void editMember(@RequestBody MemberRequest body, @PathVariable String username){
-        memberService.editMember(body, username);
+        memberService.editMember(body,username);
     }
-    //Security ????
+    //Security ADMIN
     @PatchMapping("/ranking/{username}/{value}")
     void setRankingForUser(@PathVariable String username, @PathVariable int value) {
-        memberService.setRankingForUser(username, value);
+        memberService.setRankingForUser(username,value);
     }
-    // Security ????
+
+    // Security ADMIN
     @DeleteMapping("/{username}")
     void deleteMemberByUsername(@PathVariable String username) {
         memberService.deleteMemberByUsername(username);
@@ -53,5 +55,3 @@ public class MemberController {
 
 
 }
-
-

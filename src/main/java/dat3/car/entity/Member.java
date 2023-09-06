@@ -11,18 +11,19 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Getter
 @Setter
-@Entity
 @NoArgsConstructor
-public class Member extends AdminDetails{
+// ----Lombok anotations above --------- //
+@Entity
+public class Member extends AdminDetails  {
+
     @Id
     private String username;
     @Column(nullable = false)
-    private String password;
-    @Column(nullable = false)
     private String email;
+    @Column(name="bruger_password",nullable = false)
+    private String password;
     private String firstName;
     private String lastName;
     private String street;
@@ -32,24 +33,25 @@ public class Member extends AdminDetails{
     private int ranking;
 
     @OneToMany(mappedBy = "member")
-    private List<Reservation> reservations;
+    List<Reservation> reservations;//; = new ArrayList<>();
 
     public void addReservation(Reservation reservation){
-        if(reservations == null) {
+        if (reservations == null){
             reservations = new ArrayList<>();
         }
         reservations.add(reservation);
     }
-    public Member(String user, String password, String email, String firstName,
-                  String lastName, String street, String city, String zip) {
+
+
+    public Member(String user, String password, String email,
+                  String firstName, String lastName, String street, String city, String zip) {
         this.username = user;
-        this.password = password;
         this.email = email;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.street = street;
         this.city = city;
         this.zip = zip;
     }
-
 }
