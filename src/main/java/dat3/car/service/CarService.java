@@ -84,4 +84,24 @@ public class CarService {
         return carRepository.findById(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Car with this ID does not exist"));
     }
+    public List<CarResponse> getCarsByBrandAndModel(String brand, String model){
+        List<Car> cars = carRepository.findAllByBrandAndModel(brand, model);
+        List<CarResponse> responses = cars.stream().map((car -> new CarResponse(car, false))).toList();
+        return responses;
+    }
+    public List<CarResponse> getCarsWithHigherDiscount(int minDiscount) {
+        List<Car> carsWithHigherDiscount = carRepository.findAllByBestDiscountGreaterThanEqual(minDiscount);
+        List<CarResponse> carResponses = new ArrayList<>();
+
+        for (Car car : carsWithHigherDiscount) {
+            CarResponse carResponse = new CarResponse(car, false);
+            carResponses.add(carResponse);
+        }
+
+        return carResponses;
+    }
+    public Double getAverageCarPrice() {
+        return carRepository.findAverageCarPrice();
+    }
+
 }

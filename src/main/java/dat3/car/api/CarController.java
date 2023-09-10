@@ -48,4 +48,26 @@ CarService carService;
     void deleteCarById(@PathVariable int id){
         carService.deleteCarById(id);
     }
+
+    @GetMapping("/findByBrandAndModel")
+    public List<CarResponse> getCarsByBrandAndModel(
+            @RequestParam("brand") String brand,
+            @RequestParam("model") String model) {
+        List<CarResponse> responses = carService.getCarsByBrandAndModel(brand, model);
+        return responses;
+    }
+    @PostMapping("/findByBrandAndModel")
+    public List<CarResponse> getCarsByBrandAndModel(@RequestBody CarRequest body) {
+        List<CarResponse> responses = carService.getCarsByBrandAndModel(body.getBrand(), body.getModel());
+        return responses;
+    }
+    @PostMapping("/findByBestDiscount")
+    public List<CarResponse> getCarsByBestDiscount(@RequestBody int bestDiscount) {
+        List<CarResponse> responses = carService.getCarsWithHigherDiscount(bestDiscount);
+        return responses;
+    }
+    @GetMapping("/averagePrice")
+    public double getAveragePrice() {
+        return carService.getAverageCarPrice();
+    }
 }
