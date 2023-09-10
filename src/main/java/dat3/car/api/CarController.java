@@ -49,13 +49,13 @@ CarService carService;
         carService.deleteCarById(id);
     }
 
-    @GetMapping("/findByBrandAndModel")
-    public List<CarResponse> getCarsByBrandAndModel(
-            @RequestParam("brand") String brand,
-            @RequestParam("model") String model) {
-        List<CarResponse> responses = carService.getCarsByBrandAndModel(brand, model);
-        return responses;
-    }
+//    @GetMapping("/findByBrandAndModel")
+//    public List<CarResponse> getCarsByBrandAndModel(
+//            @RequestParam("brand") String brand,
+//            @RequestParam("model") String model) {
+//        List<CarResponse> responses = carService.getCarsByBrandAndModel(brand, model);
+//        return responses;
+//    }
     @PostMapping("/findByBrandAndModel")
     public List<CarResponse> getCarsByBrandAndModel(@RequestBody CarRequest body) {
         List<CarResponse> responses = carService.getCarsByBrandAndModel(body.getBrand(), body.getModel());
